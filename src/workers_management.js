@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import {Button } from 'react-bootstrap';
+import Worker from "./worker_list.js"
 
 function Clicks() {
   const[count,setCount]=useState(0);
@@ -8,10 +9,10 @@ function Clicks() {
   return (
   <div id ="root">
     <Button variant={clicked? "success" : "dark"}onClick={test2} style={styles.move}  >List Of Workers</Button>
-    <Button variant="danger" onClick={test}>Add New Worker</Button>
-
-  <div id="portal"></div>
-  </div>
+    <Button variant="danger" onClick={GET}>Add New Worker</Button>
+    
+    <Worker/>
+      </div>
 
   );
 function print_list(){
@@ -33,7 +34,7 @@ console.log("Hello")
         <li key={data.id}> {data.name}</li>
       ))}
     </ul>
-  );
+);
 
 
 }
@@ -50,6 +51,16 @@ function test2() {
     console.log(clicked)
   return <h1>Hello</h1>;
   }
+  function GET() {
+    // Simple GET request using fetch
+    fetch('http://127.0.0.1:8000/api/worker',{
+      method: 'GET', 
+
+    })
+
+    .then(response => response.json())
+    .then(data => console.log(data));
+}
 
 
 

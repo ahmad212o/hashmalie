@@ -1,0 +1,5 @@
+git checkout -b <local branch>
+git init
+git add .
+git remote add origin https://github.com/ahmad212o/hashmalie.git
+git push -f origin backend
