@@ -9,8 +9,9 @@ function Clicks() {
   return (
   <div id ="root">
     <Button variant={clicked? "success" : "dark"}onClick={test2} style={styles.move}  >List Of Workers</Button>
-    <Button variant="danger" onClick={GET}>Add New Worker</Button>
-    
+    <Button variant="danger" onClick={POST_Register}>Add New Worker</Button>
+    <Button variant="danger" onClick={POST_LogIN}>LogINTEEST</Button>
+
     <Worker/>
       </div>
 
@@ -53,7 +54,7 @@ function test2() {
   }
   function GET() {
     // Simple GET request using fetch
-    fetch('http://127.0.0.1:8000/api/worker',{
+    fetch('http://127.0.0.1:8000/api/',{
       method: 'GET', 
 
     })
@@ -61,6 +62,37 @@ function test2() {
     .then(response => response.json())
     .then(data => console.log(data));
 }
+
+function POST_Register() {
+  // Simple GET request using fetch
+  fetch('http://127.0.0.1:8000/api/worker/register/',{
+    method: 'POST',headers: { 'Content-Type': 'application/json',
+    'Authorization' : 'Token 248ff594940b60bf5a6333afbaa23d41641b22e6 ',
+  },
+    body: JSON.stringify({ phone: '2000',password:'saed',password2:'saed',
+    is_admin:'true',first_name: 'Saed',second_name:'jaber'
+  
+  })
+  })
+
+  .then(response => response.json())
+  .then(data => console.log(data));
+}
+
+function POST_LogIN() {
+  // Simple GET request using fetch
+  fetch('http://127.0.0.1:8000/api/worker/login/',{
+    method: 'POST',headers: { 'Content-Type': 'application/json',
+  
+  },
+    body: JSON.stringify({ username: '2000',password:'saed' })
+  })
+
+  .then(response => response.json())
+  .then(data => console.log(data));
+}
+
+
 
 
 
