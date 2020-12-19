@@ -45,12 +45,12 @@ class Project(models.Model):
    
     property_type=models.CharField(max_length=20,null=True)
     image=models.ImageField(upload_to='images/',blank=True,null=True)
-    project_code=models.CharField(max_length=20,blank=True,unique=True)
+    project_code=models.CharField(max_length=20,blank=True,null=True)
     contractor=models.OneToOneField(Contractor,on_delete=models.CASCADE,null=True)
     architect=models.OneToOneField(Architect,on_delete=models.CASCADE,null=True)
     address=models.OneToOneField(Address,on_delete=models.CASCADE,null=True)
     owner=models.OneToOneField(Owner,on_delete=models.CASCADE,null=True)
-    
+    REQUIRED_FIELDS=['property_type','project_code']
     def __str__(self):
        return self.project_code
 

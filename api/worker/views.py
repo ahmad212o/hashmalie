@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
+from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from .serializers import UserSerializer,RegistrationSerializer,LogoutSerializer
 from .models import User
 from django.contrib.auth import get_user_model
@@ -40,3 +41,12 @@ class LogoutView(generics.GenericAPIView,mixins.ListModelMixin,mixins.CreateMode
         request.user.auth_token.delete()
         content = 'success'
         return Response(content,status=status.HTTP_200_OK)
+
+
+
+class UpdateUserView(RetrieveUpdateDestroyAPIView):
+    def get_queryset(self):
+        queryset = User.objects.filter(id=self.kwargs["pk"])
+        return queryset
+    serializer_class = UserSerializer
+    permission_classes=(IsAuthenticated,IsAdminUser)
