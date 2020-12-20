@@ -22,4 +22,5 @@ urlpatterns = [
   path('',home,name='api.home'),
   path('worker/',include('api.worker.urls')),
   path('project/',include('api.project.urls')),
+  path('info/',include('api.info.urls')),
 ]

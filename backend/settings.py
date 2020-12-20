@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'api',
     'api.worker',
     'api.project',
+    'api.info',
+    'api.schedule',
+    'api.finance',
 ]
 
 MIDDLEWARE = [

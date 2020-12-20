@@ -19,7 +19,7 @@ class ProjectView(ListAPIView):
 class CreateProjectView(CreateAPIView):
     serializer_class=ProjectSerializer
     queryset=Project.objects.all()
-    #permission_classes=(IsAuthenticated,IsAdminUser)
+    permission_classes=(IsAuthenticated,IsAdminUser)
 
 class ManageProjectView(RetrieveUpdateDestroyAPIView):
     serializer_class=ProjectSerializer
