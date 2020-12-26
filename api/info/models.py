@@ -7,6 +7,8 @@ class Car(models.Model):
     insurance_age=models.IntegerField(blank=True)
     image=models.ImageField(upload_to='images/',blank=True,null=True)
     def __str__(self):
+        if not self.license_no:
+            return "no license number"
         return self.license_no
 
 
@@ -17,6 +19,8 @@ class Info(models.Model):
     deputy_director=models.OneToOneField(User,related_name='deputy_director',on_delete=models.CASCADE,null=True)    
     car=models.ManyToManyField(Car,blank=True)
     def __str__(self):
+        if not self.company_name:
+            return "no name"
         return self.company_name
 
 

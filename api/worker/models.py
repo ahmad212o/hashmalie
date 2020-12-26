@@ -76,8 +76,9 @@ class User(AbstractBaseUser, PermissionsMixin):
   REQUIRED_FIELDS = ['first_name','second_name',]
 
   def __str__(self):
-    
-    return self.first_name+" "+self.second_name
+    if  self.first_name and self.second_name :
+      return self.first_name+" "+self.second_name
+    return self.first_name  
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):

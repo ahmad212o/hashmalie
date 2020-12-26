@@ -15,5 +15,7 @@ class Schedule(models.Model):
     image = models.ImageField(upload_to='images/',blank=True,null=True)
 
     def __str__(self):
-       return self.title
+        if not self.title:
+            return "no title"
+        return self.title
 

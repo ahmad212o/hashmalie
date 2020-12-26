@@ -6,7 +6,9 @@ class Contractor(models.Model):
     phone_no=models.CharField(max_length=25,blank=True)
    
     def __str__(self):
-       return self.first_name+" "+self.second_name+" "+self.phone_no
+      if not self.second_name:
+          return "no name"
+      return self.second_name
 
 
 
@@ -16,7 +18,9 @@ class Architect(models.Model):
     phone_no=models.CharField(max_length=25,blank=True)
     email=models.EmailField(blank=True)
     def __str__(self):
-       return self.first_name+" "+self.second_name+" "+self.phone_no
+      if not self.second_name:
+          return "no name"
+      return self.second_name
 
 
 
@@ -27,7 +31,9 @@ class Address(models.Model):
     street=models.CharField(max_length=20,null=True)
     property_no=models.CharField(max_length=20,null=True)
     def __str__(self):
-       return self.city+" "+self.street+" "+self.property_no
+      if not self.property_no:
+          return "no property number"
+      return str(self.property_no)
 
 
 
@@ -37,8 +43,17 @@ class Owner(models.Model):
     phone_no=models.CharField(max_length=25,blank=True)
     email=models.EmailField(blank=True)
     def __str__(self):
-       return self.first_name+" "+self.second_name+" "+self.phone_no
+      if not self.second_name:
+          return "no name"
+      return self.second_name
 
+class File(models.Model):
+   # project_code=models.ForeignKey(Project,related_name='file',on_delete=models.CASCADE,null=True)
+    name=models.CharField(max_length=20,null=True)
+    file1=models.FileField(upload_to='files/',null=True,blank=True)
+    uploaded_at=models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+       return str(self.name)
 
 
 class Project(models.Model):
@@ -50,15 +65,13 @@ class Project(models.Model):
     architect=models.OneToOneField(Architect,on_delete=models.CASCADE,null=True)
     address=models.OneToOneField(Address,on_delete=models.CASCADE,null=True)
     owner=models.OneToOneField(Owner,on_delete=models.CASCADE,null=True)
+    file=models.ForeignKey(File,related_name='file',on_delete=models.CASCADE,null=True)
     REQUIRED_FIELDS=['property_type','project_code']
     def __str__(self):
-       return self.project_code
+      if not self.project_code:
+          return "no project code"
+      return str(self.project_code)
 
 
-class File(models.Model):
-    name=models.CharField(max_length=20,null=True)
-    project=models.ForeignKey(Project,on_delete=models.CASCADE,null=True)
-    file=models.FileField(upload_to='files/',null=True,blank=True)
-    uploaded_at=models.DateTimeField(auto_now_add=True)
-    def __str__(self):
-       return self.name
+
+
