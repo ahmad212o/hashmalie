@@ -32,18 +32,25 @@ class ContractorSerializers(serializers.ModelSerializer):
             )
 
 class FileSerializers(serializers.ModelSerializer):
-   # project=ProjectSerializer(many=True,read_only=True)
-    class Meta:
-        model = File
-        fields=(
-            '__all__'
-            )
+        project=serializers.HyperlinkedRelatedField(read_only=True,view_name='project')
+        class Meta:
+            model = File
+            fields=(
+             '__all__'
+                )
+
+
+
 
 
 
 
 class ProjectSerializer(serializers.ModelSerializer):
-   
+    owner=serializers.HyperlinkedRelatedField(read_only=True,view_name='owner')
+    contractor=serializers.HyperlinkedRelatedField(read_only=True,view_name='contractor')
+    address=serializers.HyperlinkedRelatedField(read_only=True,view_name='address')
+    architect=serializers.HyperlinkedRelatedField(read_only=True,view_name='architect')
+    file=FileSerializers(many=True,read_only=True)
     class Meta:
         model = Project
         fields=(
@@ -54,8 +61,5 @@ class ProjectSerializer(serializers.ModelSerializer):
 
         
 
-
-
-    
 
 
