@@ -48,7 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
   second_name = models.CharField(max_length=50, default='worker')
 
   phone = models.CharField(max_length=11,unique=True,validators=[RegexValidator(
-            regex='^[0][5][0|2|3|4|5|9]{1}[-]{0,1}[0-9]{7}$',
+            regex='^[0][5][0|2|3|4|5|6|9]{1}[-]{0,1}[0-9]{7}$',
             message='wrong Phone number',
             code='invalid_phone'
         ),])
