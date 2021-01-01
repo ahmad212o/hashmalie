@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework.generics import RetrieveUpdateDestroyAPIView,ListAPIView,CreateAPIView,ListCreateAPIView
-from .serializers import ProjectSerializer,FileSerializers,ContractorSerializers,AddressSerializers,OwnerSerializers,ArchitectSerializers
-from .models import Project,File,Address,Architect,Owner,Contractor
+from .serializers import ProjectSerializer,FileSerializers
+from .models import Project,File
 
 # Create your views here.
 class ProjectView(ListAPIView):
@@ -17,34 +17,14 @@ class ProjectView(ListAPIView):
    # permission_classes=(IsAuthenticated,)
    
 
-class OwnerView(RetrieveUpdateDestroyAPIView):
-    serializer_class=OwnerSerializers
-    def get_queryset(self):
-        queryset = Owner.objects.filter(id=self.kwargs["pk"])
-        return queryset
+
+
+
    
 
-class ContractorView(RetrieveUpdateDestroyAPIView):
-    serializer_class=ContractorSerializers
-    def get_queryset(self):
-        queryset = Contractor.objects.filter(id=self.kwargs["pk"])
-        return queryset
-   
+
    
 
-class ArchitectView(RetrieveUpdateDestroyAPIView):
-    serializer_class=ArchitectSerializers
-    def get_queryset(self):
-        queryset = Architect.objects.filter(id=self.kwargs["pk"])
-        return queryset
-   
-   
-class AddressView(RetrieveUpdateDestroyAPIView):
-    serializer_class=AddressSerializers
-    def get_queryset(self):
-        queryset = Address.objects.filter(id=self.kwargs["pk"])
-        return queryset
-   
    
 
 class FileView(RetrieveUpdateDestroyAPIView):

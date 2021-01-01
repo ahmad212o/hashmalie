@@ -56,7 +56,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
   username = None
 
-
   image = models.ImageField(upload_to='images/',blank=True,null=True)
 
   is_staff =models.BooleanField(default=False)
